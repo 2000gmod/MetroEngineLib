@@ -33,7 +33,6 @@ void Poly::draw(){
         }
         edges.push_back(Line(WHITE, 1, vertices.back(), vertices.front(), NULL));
 
-        Vector2 pixelToTest(minX, minY);
         for(int curY = minY; curY <= maxY; curY++){
             std::vector<Vector2> intersections;
             bool drawEnabled = true;
@@ -49,7 +48,6 @@ void Poly::draw(){
                     drawer.draw();
                 }
             }
-            
         }
     }
 
@@ -69,8 +67,9 @@ void Poly::update_vertices(std::vector<Vector2> vertexList){
     vertices = vertexList;
 }
 
-void Poly::update_color(uint32_t new_color){
+void Poly::update_color(uint32_t new_color, uint32_t new_color_fill){
     color = new_color;
+    fillColor = new_color_fill;
 }
 
 void Poly::moveByVector(Vector2 move){

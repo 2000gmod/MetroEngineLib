@@ -74,7 +74,7 @@ class Poly{
 
         void draw();
         void update_vertices(std::vector<Vector2> vertexList);
-        void update_color(uint32_t new_color);
+        void update_color(uint32_t new_color_outline, uint32_t new_color_fill);
         void moveByVector(Vector2 move);
         bool isInside(Vector2 point);
 

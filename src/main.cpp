@@ -6,10 +6,11 @@ extern SDL_Texture* screen;
 
 int main(){
     initWindow("Title");
+
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
-    Vector2 vec_mouse_coords;
+    Vector2 vec_mouse_coords(WIDTH/2, HEIGHT/2);
 
     Vector2 vec_screen_center(WIDTH/2, HEIGHT/2);
     Vector2 vec_corner_UL(0,0);
@@ -31,9 +32,10 @@ int main(){
 
     PolyObject metroLogo({metroRombo1, metroRombo2, metroRombo3});
 
-    Poly tri1(GREEN, DARKRED, 6, FULL, {Vector2(WIDTH/2, HEIGHT/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
+    Poly tri1(LIME, CYAN, 6, FULL, {Vector2(WIDTH/2, HEIGHT/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
 
     //GAMELOOP
+    SDL_Delay(500);
     while(1){
         //KEYBOARD
         SDL_PumpEvents();
