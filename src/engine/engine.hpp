@@ -1,5 +1,5 @@
-#ifndef ENGINEH_HPP
-#define ENGINEH_HPP
+#ifndef ENGINE_HPP
+#define ENGINE_HPP
 
 #include <SDL2/SDL.h>
 

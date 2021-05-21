@@ -7,6 +7,9 @@
 #include "../vectors.hpp"
 #include "../rendering.hpp"
 
+#define FULL 1
+#define EMPTY 0
+
 class Line{
     public:
         uint32_t color;
@@ -21,6 +24,7 @@ class Line{
         void draw();
         void update_position(Vector2 point_1, Vector2 point_2);
         void update_color(uint32_t new_color);
+        bool isOnSameSide(Vector2 a, Vector2 b);
 };
 
 class Rectangle{
@@ -58,17 +62,28 @@ class Circle{
 class Poly{
     public:
         uint32_t color;
+        uint32_t fillColor;
         std::vector<Vector2> vertices;
         int thickness;
+        bool full;
         uint32_t* pixelBuffer;
 
         Poly();
-        Poly(uint32_t color_init, int thick,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
+        Poly(uint32_t color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
+        Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
 
         void draw();
         void update_vertices(std::vector<Vector2> vertexList);
         void update_color(uint32_t new_color);
         void moveByVector(Vector2 move);
+        bool isInside(Vector2 point);
+
+    private:
+        int minX; 
+        int maxX; 
+        int minY;
+        int maxY;
+        void updateMinMax();
 };
 
 class PolyObject{

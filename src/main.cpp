@@ -1,11 +1,11 @@
-#include "engineh.hpp"
+#include "engine/engine.hpp"
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* screen;
 
 int main(){
-    initWindow("MetroEngine::Demo1 || Made by 2000gmod");
+    initWindow("Title");
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
@@ -14,21 +14,24 @@ int main(){
     Vector2 vec_screen_center(WIDTH/2, HEIGHT/2);
     Vector2 vec_corner_UL(0,0);
     Vector2 vec_corner_UR(0, WIDTH);
-    Vector2 vec_corner_LL(HEIGHT, 0);
-    Vector2 vec_corner_LR(HEIGHT, WIDTH);
+    Vector2 vec_corner_LL(0, HEIGHT);
+    Vector2 vec_corner_LR(WIDTH, HEIGHT);
 
-    Text t1("", 1, vec_screen_center, ORANGE);
-    Text t2("test", 1, vec_screen_center, WHITE);
-    t2.p1 = Vector2(WIDTH/2, HEIGHT/2);
-    Circle center(RED, 2, vec_mouse_coords, 50, pixel_array);
+    Text t1("", 1, vec_corner_UL, ORANGE);
+    Text t2("test", 1, vec_corner_UL, WHITE);
 
-    Poly poly1(TEAL, 2, {Vector2(500,500), Vector2(600,300), Vector2(700,50)}, pixel_array);
-    Poly metroRombo1(RED, 2, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, pixel_array);
-    Poly metroRombo2(RED, 2, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, pixel_array);
-    Poly metroRombo3(RED, 2, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, pixel_array);
+    Text title("METRO ENGINE DEMO 1", 3, Vector2(vec_screen_center.x - 300 , 0), RED);
+
+    Poly metroRombo1(RED, 2, FULL, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, pixel_array);
+    Poly metroRombo2(RED, 2, FULL, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, pixel_array);
+    Poly metroRombo3(RED, 2, FULL, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, pixel_array);
+
+    Line line1(WHITE, 2, vec_corner_UL, vec_corner_LR, pixel_array);
 
 
     PolyObject metroLogo({metroRombo1, metroRombo2, metroRombo3});
+
+    Poly tri1(GREEN, DARKRED, 6, FULL, {Vector2(WIDTH/2, HEIGHT/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
 
     //GAMELOOP
     while(1){
@@ -50,19 +53,25 @@ int main(){
         
         //DRAWING
         clearScreen(pixel_array);
+
+        tri1.draw();
+        tri1.update_vertices({Vector2(100, 100), vec_mouse_coords, Vector2(800,400)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
-        t2.setText("Current size: " + std::to_string(t2.size));
+        t2.setText("upperR " + std::to_string(line1.isOnSameSide(vec_mouse_coords, vec_corner_UR)));
         t2.draw();
+
+        title.draw();
         
         
         t1.p1 = vec_mouse_coords + Vector2(10, 6);
         //center.draw();
         //center.update_position(vec_mouse_coords);
-        poly1.draw();
         metroLogo.draw();
-        poly1.update_vertices({Vector2(500,500), Vector2(600,300), vec_mouse_coords});
         t1.draw();
+        //line1.draw();
+
+        
 
         //screen update
         updateFrame();
@@ -72,6 +81,8 @@ int main(){
             SDL_Delay(targetDelay - clock.deltaTime);
         }
     }
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 
     return 0;
 }

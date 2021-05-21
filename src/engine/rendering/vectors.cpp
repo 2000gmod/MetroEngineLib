@@ -35,6 +35,12 @@ void Vector2::operator = (const Vector2& vecIn){
     y = vecIn.y;
     return;
 }
+
+bool Vector2::operator == (const Vector2& rhs){
+    if(x == rhs.x && y == rhs.y) return true;
+    else return false;
+}
+
 Vector2::Vector2(){
     x = 0;
     y = 0;

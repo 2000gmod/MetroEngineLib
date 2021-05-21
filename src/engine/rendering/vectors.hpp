@@ -15,6 +15,7 @@ class Vector2{
         Vector2 operator * (const float&);
         Vector2 operator / (const float&);
         void operator = (const Vector2&);
+        bool operator == (const Vector2&);
         float dot(Vector2* vec1);
         float magnitude();
         void normalize();

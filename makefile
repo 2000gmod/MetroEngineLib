@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs`
+CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs` -O1
 TARGET = graph
 
 .PHONY: compile clean run

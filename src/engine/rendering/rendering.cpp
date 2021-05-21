@@ -27,6 +27,7 @@ void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
     if(pos.x < 0 || pos.x >= WIDTH || pos.y < 0 || pos.y >= HEIGHT){
         return;
     }
+    //if (!(pixelBuffer[(int)round(pos.y)*WIDTH + (int)round(pos.x)] ^ colour)) return;
     pixelBuffer[(int)round(pos.y)*WIDTH + (int)round(pos.x)] = colour;
     return;
 }
