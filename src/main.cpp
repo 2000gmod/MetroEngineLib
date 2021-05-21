@@ -9,23 +9,23 @@ int main(){
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
-    vector2 vec_mouse_coords;
+    Vector2 vec_mouse_coords;
 
-    vector2 vec_screen_center(WIDTH/2, HEIGHT/2);
-    vector2 vec_corner_UL(0,0);
-    vector2 vec_corner_UR(0, WIDTH);
-    vector2 vec_corner_LL(HEIGHT, 0);
-    vector2 vec_corner_LR(HEIGHT, WIDTH);
+    Vector2 vec_screen_center(WIDTH/2, HEIGHT/2);
+    Vector2 vec_corner_UL(0,0);
+    Vector2 vec_corner_UR(0, WIDTH);
+    Vector2 vec_corner_LL(HEIGHT, 0);
+    Vector2 vec_corner_LR(HEIGHT, WIDTH);
 
     Text t1("", 1, vec_screen_center, ORANGE);
     Text t2("test", 1, vec_screen_center, WHITE);
-    t2.p1 = vector2(WIDTH/2, HEIGHT/2);
+    t2.p1 = Vector2(WIDTH/2, HEIGHT/2);
     Circle center(RED, 2, vec_mouse_coords, 50, pixel_array);
 
-    Poly poly1(TEAL, 2, {vector2(500,500), vector2(600,300), vector2(700,50)}, pixel_array);
-    Poly metroRombo1(RED, 2, {vector2(100,100), vector2(50,200), vector2(100,300), vector2(150,200)}, pixel_array);
-    Poly metroRombo2(RED, 2, {vector2(200,100), vector2(150,200), vector2(200,300), vector2(250,200)}, pixel_array);
-    Poly metroRombo3(RED, 2, {vector2(300,100), vector2(250,200), vector2(300,300), vector2(350,200)}, pixel_array);
+    Poly poly1(TEAL, 2, {Vector2(500,500), Vector2(600,300), Vector2(700,50)}, pixel_array);
+    Poly metroRombo1(RED, 2, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, pixel_array);
+    Poly metroRombo2(RED, 2, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, pixel_array);
+    Poly metroRombo3(RED, 2, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, pixel_array);
 
 
     PolyObject metroLogo({metroRombo1, metroRombo2, metroRombo3});
@@ -56,12 +56,12 @@ int main(){
         t2.draw();
         
         
-        t1.p1 = vec_mouse_coords + vector2(10, 6);
+        t1.p1 = vec_mouse_coords + Vector2(10, 6);
         //center.draw();
         //center.update_position(vec_mouse_coords);
         poly1.draw();
         metroLogo.draw();
-        poly1.update_vertices({vector2(500,500), vector2(600,300), vec_mouse_coords});
+        poly1.update_vertices({Vector2(500,500), Vector2(600,300), vec_mouse_coords});
         t1.draw();
 
         //screen update

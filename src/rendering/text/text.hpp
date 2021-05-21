@@ -148,18 +148,18 @@ class Text{
     public:
         std::string body;
         uint32_t color;
-        vector2 p1;
+        Vector2 p1;
         double size;
 
         Text();
-        Text(std::string input, double _size, vector2 location, uint32_t _color);
+        Text(std::string input, double _size, Vector2 location, uint32_t _color);
 
         void setText(std::string input);
         std::string getText();
 
         void draw();
 
-        vector2 getCenter();
+        Vector2 getCenter();
 
 };
 

@@ -4,7 +4,7 @@ Poly::Poly(){
     color = WHITE;
 }
 
-Poly::Poly(uint32_t color_init, int thick, std::vector<vector2> vertexList, uint32_t* drawingBuffer){
+Poly::Poly(uint32_t color_init, int thick, std::vector<Vector2> vertexList, uint32_t* drawingBuffer){
     color = color_init;
     thickness = thick;
     vertices = vertexList;
@@ -13,7 +13,7 @@ Poly::Poly(uint32_t color_init, int thick, std::vector<vector2> vertexList, uint
 
 void Poly::draw(){
     if (vertices.size() <= 1) return;
-    Line line(color, thickness, vector2(0,0), vector2(0,0), pixelBuffer);
+    Line line(color, thickness, Vector2(0,0), Vector2(0,0), pixelBuffer);
     for (uint64_t i = 0; i < vertices.size() - 1; i++){
         line.p1 = vertices[i];
         line.p2 = vertices[i+1];
@@ -23,7 +23,7 @@ void Poly::draw(){
     line.draw();
 }
 
-void Poly::update_vertices(std::vector<vector2> vertexList){
+void Poly::update_vertices(std::vector<Vector2> vertexList){
     vertices = vertexList;
 }
 
@@ -31,8 +31,8 @@ void Poly::update_color(uint32_t new_color){
     color = new_color;
 }
 
-void Poly::moveByVector(vector2 move){
-    for (vector2 vert : vertices){
+void Poly::moveByVector(Vector2 move){
+    for (Vector2 vert : vertices){
         vert = vert + move;
     }
 }

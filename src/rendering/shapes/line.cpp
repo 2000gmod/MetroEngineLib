@@ -1,13 +1,13 @@
 #include "shapes.hpp"
 
 Line::Line(){
-    vector2 p1(0, 0);
-    vector2 p2(WIDTH, HEIGHT);
+    Vector2 p1(0, 0);
+    Vector2 p2(WIDTH, HEIGHT);
     color = RED;
     return;
 }
 
-Line::Line(uint32_t color_init, int thick, vector2 point_1, vector2 point_2, uint32_t* drawingBuffer){
+Line::Line(uint32_t color_init, int thick, Vector2 point_1, Vector2 point_2, uint32_t* drawingBuffer){
     color = color_init;
     thickness = thick;
     p1 = point_1;
@@ -21,7 +21,7 @@ void Line::draw(){
     return;
 }
 
-void Line::update_position(vector2 point_1, vector2 point_2){
+void Line::update_position(Vector2 point_1, Vector2 point_2){
     p1 = point_1;
     p2 = point_2;
     return;

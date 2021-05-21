@@ -4,10 +4,10 @@ extern uint32_t pixel_array[WIDTH*HEIGHT];
 Text::Text(){
     body = "";
     color = 0;
-    p1 = vector2(0,0);
+    p1 = Vector2(0,0);
 }
 
-Text::Text(std::string input, double _size, vector2 location, uint32_t _color){
+Text::Text(std::string input, double _size, Vector2 location, uint32_t _color){
     body = input;
     size = _size;
     p1 = location;
@@ -40,7 +40,7 @@ void Text::draw(){
         for(int i = 0; i < CHAR_HEIGHT; i++){
             for(int j = 0; j < CHAR_WIDTH; j++){
                 if(chr[i] & (0x01 << j)){
-                    vector2 currPixel(p1.x + j*size + horizontalOffset, p1.y + i*size + verticalOffset);
+                    Vector2 currPixel(p1.x + j*size + horizontalOffset, p1.y + i*size + verticalOffset);
                         drawPixelSize(pixel_array, currPixel, color, size);
                 }
             }
@@ -50,7 +50,7 @@ void Text::draw(){
     }
 }
 
-vector2 Text::getCenter(){
+Vector2 Text::getCenter(){
     double horizontalOffset = 0;
     double maxHorizontal = 0;
     double verticalOffset = 0;
@@ -63,5 +63,5 @@ vector2 Text::getCenter(){
             horizontalOffset = 0;
         }
     }
-    return vector2(maxHorizontal/2, verticalOffset/2);
+    return Vector2(maxHorizontal/2, verticalOffset/2);
 }

@@ -23,7 +23,7 @@ void clearScreen(uint32_t* pixelBuffer){
     }
 }
 
-void drawPixel(uint32_t* pixelBuffer, vector2 pos, uint32_t colour){
+void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
     if(pos.x < 0 || pos.x >= WIDTH || pos.y < 0 || pos.y >= HEIGHT){
         return;
     }
@@ -31,7 +31,7 @@ void drawPixel(uint32_t* pixelBuffer, vector2 pos, uint32_t colour){
     return;
 }
 
-void drawPixelSize(uint32_t* pixelBuffer, vector2 pos, uint32_t colour, double size){
+void drawPixelSize(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour, double size){
     if(fabs(size - 1) < 0.1f) drawPixel(pixelBuffer, pos, colour);
     if (size < 0.1f) return;
     if(pos.x < 0 || pos.x >= WIDTH - size || pos.y < 0 || pos.y >= HEIGHT - size){
@@ -39,14 +39,14 @@ void drawPixelSize(uint32_t* pixelBuffer, vector2 pos, uint32_t colour, double s
     }
     for(int i = (-size/2); i <= size/2; i++){
         for(int j = (-size/2); j <= size/2; j++){
-            drawPixel(pixelBuffer, pos + vector2(i, j), colour);
+            drawPixel(pixelBuffer, pos + Vector2(i, j), colour);
         }
     }
     return;
 }
 
-void drawCircle(uint32_t* pixelBuffer, vector2 pos, double radius, uint32_t colour, int thickness){
-    vector2 pixel(0, 0);
+void drawCircle(uint32_t* pixelBuffer, Vector2 pos, double radius, uint32_t colour, int thickness){
+    Vector2 pixel(0, 0);
     for(float t = 0.0f; t < 2*PI; t += 0.00390625f/2){
         pixel.x = (int) round(radius*cos(t) + pos.x);
         pixel.y = (int) round(radius*sin(t) + pos.y);
@@ -55,8 +55,8 @@ void drawCircle(uint32_t* pixelBuffer, vector2 pos, double radius, uint32_t colo
     return;
 }
 
-void drawLine(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour, int thickness){
-    vector2 drawing(0, 0);
+void drawLine(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour, int thickness){
+    Vector2 drawing(0, 0);
     if(p1.x > p2.x) swapVector2(&p1, &p2);
 
     if(p1.x == p2.x){
@@ -87,9 +87,9 @@ void drawLine(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour, in
     return;
 }
 
-void drawRectangle(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour){
-    vector2 p3(0, 0);
-    vector2 p4(0, 0);
+void drawRectangle(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour){
+    Vector2 p3(0, 0);
+    Vector2 p4(0, 0);
 
     p3.x = p2.x;
     p3.y = p1.y;
@@ -105,7 +105,7 @@ void drawRectangle(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colou
     return;
 }
 
-void drawQuad(uint32_t* pixelBuffer, vector2 p1, vector2 p2, vector2 p3, vector2 p4, uint32_t colour){
+void drawQuad(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint32_t colour){
     drawLine(pixelBuffer, p1, p2, colour, 1);
     drawLine(pixelBuffer, p2, p3, colour, 1);
 
@@ -114,11 +114,11 @@ void drawQuad(uint32_t* pixelBuffer, vector2 p1, vector2 p2, vector2 p3, vector2
     return;
 }
 
-void drawFilledRect(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour){
+void drawFilledRect(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour){
     if(p1.x == p2.x || p1.y == p2.y) return;
     if(p1.y < p2.y) swapVector2(&p1, &p2);
 
-    vector2 draw1(0, 0), draw2(0, 0);
+    Vector2 draw1(0, 0), draw2(0, 0);
     *(&draw1) = *(&p1);
     draw2.y = p1.y;
     draw2.x = p2.x;

@@ -1,13 +1,13 @@
 #include "shapes.hpp"
 
 Rectangle::Rectangle(){
-    vector2 p1(10, 10);
-    vector2 p2(WIDTH/2, HEIGHT/2);
+    Vector2 p1(10, 10);
+    Vector2 p2(WIDTH/2, HEIGHT/2);
     color = RED;
     return;
 }
 
-Rectangle::Rectangle(uint32_t color_init, vector2 point_1, vector2 point_2, uint32_t* drawingBuffer){
+Rectangle::Rectangle(uint32_t color_init, Vector2 point_1, Vector2 point_2, uint32_t* drawingBuffer){
     color = color_init;
     p1 = point_1;
     p2 = point_2;
@@ -20,7 +20,7 @@ void Rectangle::draw(){
     return;
 }
 
-void Rectangle::update_position(vector2 point_1, vector2 point_2){
+void Rectangle::update_position(Vector2 point_1, Vector2 point_2){
     p1 = point_1;
     p2 = point_2;
     return;

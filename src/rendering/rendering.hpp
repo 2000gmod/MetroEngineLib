@@ -16,16 +16,16 @@ class Clock{
 };
 
 void clearScreen(uint32_t* pixelBuffer);
-void drawPixel(uint32_t* pixelBuffer, vector2 pos, uint32_t colour);
-void drawPixelSize(uint32_t* pixelBuffer, vector2 pos, uint32_t colour, double size);
+void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour);
+void drawPixelSize(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour, double size);
 
-void drawCircle(uint32_t* pixelBuffer, vector2 pos, double radius, uint32_t colour, int thickness);
-void drawLine(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour, int thickness);
+void drawCircle(uint32_t* pixelBuffer, Vector2 pos, double radius, uint32_t colour, int thickness);
+void drawLine(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour, int thickness);
 
-void drawRectangle(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour);
-void drawQuad(uint32_t* pixelBuffer, vector2 p1, vector2 p2, vector2 p3, vector2 p4, uint32_t colour);
+void drawRectangle(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour);
+void drawQuad(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint32_t colour);
 
-void drawFilledRect(uint32_t* pixelBuffer, vector2 p1, vector2 p2, uint32_t colour);
+void drawFilledRect(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour);
 
 
 #endif

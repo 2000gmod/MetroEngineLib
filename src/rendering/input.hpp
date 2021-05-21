@@ -3,6 +3,6 @@
 #include "vectors.hpp"
 #include "SDL2/SDL.h"
 
-void updateMouse(vector2* mouse);
+void updateMouse(Vector2* mouse);
 
 #endif
