@@ -11,6 +11,7 @@ Poly::Poly(uint32_t color_init, int thick, bool paintedInside, std::vector<Vecto
     full = paintedInside;
     vertices = vertexList;
     pixelBuffer = drawingBuffer;
+    updateMinMax();
 }
 
 Poly::Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer){
@@ -20,11 +21,11 @@ Poly::Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool painte
     full = paintedInside;
     vertices = vertexList;
     pixelBuffer = drawingBuffer;
+    updateMinMax();
 }
 
 void Poly::draw(){
     if (vertices.size() <= 2) return;
-    updateMinMax();
 
     if(full){
         std::vector<Line> edges;
@@ -65,6 +66,7 @@ void Poly::draw(){
 
 void Poly::update_vertices(std::vector<Vector2> vertexList){
     vertices = vertexList;
+    updateMinMax();
 }
 
 void Poly::update_color(uint32_t new_color, uint32_t new_color_fill){
@@ -76,6 +78,7 @@ void Poly::moveByVector(Vector2 move){
     for (Vector2 vert : vertices){
         vert = vert + move;
     }
+    updateMinMax();
 }
 bool Poly::isInside(Vector2 point){
     std::vector<Line> edges;
