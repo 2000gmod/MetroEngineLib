@@ -4,7 +4,10 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* screen;
 
-uint32_t pixel_array[WIDTH*HEIGHT];
+extern const int ME_Width;
+extern const int ME_Height;
+
+uint32_t *pixel_array = new uint32_t[ME_Height*ME_Width]; 
 
 Clock::Clock(){
     deltaTime = 0;
@@ -18,24 +21,24 @@ void Clock::Tick(){
 }
 
 void clearScreen(uint32_t* pixelBuffer){
-    for(int k = 0; k <= WIDTH * HEIGHT; k++){
+    for(int k = 0; k <= ME_Width * ME_Height; k++){
         pixelBuffer[k] = 0;
     }
 }
 
 void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
-    if(pos.x < 0 || pos.x >= WIDTH || pos.y < 0 || pos.y >= HEIGHT){
+    if(pos.x < 0 || pos.x >= ME_Width || pos.y < 0 || pos.y >= ME_Height){
         return;
     }
-    //if (!(pixelBuffer[(int)round(pos.y)*WIDTH + (int)round(pos.x)] ^ colour)) return;
-    pixelBuffer[(int)round(pos.y)*WIDTH + (int)round(pos.x)] = colour;
+    //if (!(pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)] ^ colour)) return;
+    pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)] = colour;
     return;
 }
 
 void drawPixelSize(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour, double size){
     if(fabs(size - 1) < 0.1f) drawPixel(pixelBuffer, pos, colour);
     if (size < 0.1f) return;
-    if(pos.x < 0 || pos.x >= WIDTH - size || pos.y < 0 || pos.y >= HEIGHT - size){
+    if(pos.x < 0 || pos.x >= ME_Width - size || pos.y < 0 || pos.y >= ME_Height - size){
         return;
     }
     for(int i = (-size/2); i <= size/2; i++){

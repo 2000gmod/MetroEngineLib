@@ -14,8 +14,6 @@
 #include "rendering/text/text.hpp"
 #include "rendering/color.hpp"
 
-#define WIDTH                   960
-#define HEIGHT                  540
 
 #define FRAMERATE               60
 
@@ -25,6 +23,12 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* screen;
 
-extern uint32_t pixel_array[WIDTH*HEIGHT];
+extern SDL_AudioDeviceID deviceID;
+
+extern SDL_AudioSpec wavSpec;
+extern Uint32 wavLength;
+extern Uint8 *wavBuffer; 
+
+extern uint32_t *pixel_array;
 
 #endif

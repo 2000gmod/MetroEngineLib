@@ -1,16 +1,50 @@
+TARGET = $(OUTDIR)/graph
+
 CC = g++
-CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs` -O1
-TARGET = graph
+CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs` -O1 -MMD
 
-.PHONY: compile clean run
 
-default: compile
+OBJDIR = obj
+SRCDIR = src
 
-compile:
-	$(CC) -o $(TARGET) $(shell find . -name '*.cpp') $(CFLAGS)
+OUTDIR = out
+
+SOURCES := $(shell find . -name '*.cpp')
+OBJECTS := $(subst .cpp,.o, $(subst ./src,./$(OBJDIR),$(SOURCES)))
+DEPS := $(shell find . -name '*.d')
+
+.PHONY: default
+default:
+	$(MAKE) $(TARGET)
+# 	$(MAKE) run
+
+
+
+$(TARGET): $(OBJECTS) | $(OUTDIR)
+	$(CC) -o $(TARGET) $^ $(CFLAGS) 
+
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+
+include $(DEPS)
+
+$(OUTDIR):
+	mkdir -p $@
+
+$(OBJDIR):
+	mkdir -p $@
+	$(shell rsync -a --include='*/' --exclude='*' $(SRCDIR)/ $(OBJDIR)/)
+
+
+.PHONY: clean deepclean run
+
+run: $(TARGET)
+	./$(TARGET)
 
 clean:
-	rm -f $(TARGET)
+	rm -rf $(OUTDIR)
 
-run: clean compile
-	./$(TARGET)
+deepclean: clean
+	rm -rf $(OBJDIR)

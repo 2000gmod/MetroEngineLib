@@ -2,7 +2,7 @@
 
 Line::Line(){
     Vector2 p1(0, 0);
-    Vector2 p2(WIDTH, HEIGHT);
+    Vector2 p2(ME_Width, ME_Height);
     color = RED;
     return;
 }

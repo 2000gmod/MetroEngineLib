@@ -1,5 +1,10 @@
 #include "text.hpp"
-extern uint32_t pixel_array[WIDTH*HEIGHT];
+
+
+extern const int ME_Width;
+extern const int ME_Height;
+
+extern uint32_t *pixel_array;
 
 Text::Text(){
     body = "";
@@ -28,7 +33,7 @@ void Text::draw(){
     int verticalOffset = 0;
     for(const unsigned char& c : body){
         if(c == '\n'){ 
-            verticalOffset += size*(CHAR_HEIGHT + LINE_HEIGHT);
+            verticalOffset += size*(CHAR_ME_Height + LINE_ME_Height);
             horizontalOffset = 0;
             continue;
         }
@@ -37,8 +42,8 @@ void Text::draw(){
         
         const uint8_t* chr = font[index];
 
-        for(int i = 0; i < CHAR_HEIGHT; i++){
-            for(int j = 0; j < CHAR_WIDTH; j++){
+        for(int i = 0; i < CHAR_ME_Height; i++){
+            for(int j = 0; j < CHAR_ME_Width; j++){
                 if(chr[i] & (0x01 << j)){
                     Vector2 currPixel(p1.x + j*size + horizontalOffset, p1.y + i*size + verticalOffset);
                         drawPixelSize(pixel_array, currPixel, color, size);
@@ -46,7 +51,7 @@ void Text::draw(){
             }
         }
     
-    horizontalOffset += size*(CHAR_WIDTH + SPACE_WIDTH);
+    horizontalOffset += size*(CHAR_ME_Width + SPACE_ME_Width);
     }
 }
 
@@ -56,9 +61,9 @@ Vector2 Text::getCenter(){
     double verticalOffset = 0;
 
     for(const unsigned char& c : body){
-        horizontalOffset += size*(CHAR_WIDTH + SPACE_WIDTH);
+        horizontalOffset += size*(CHAR_ME_Width + SPACE_ME_Width);
         if(c == '\n'){ 
-            verticalOffset += size*(CHAR_HEIGHT + LINE_HEIGHT);
+            verticalOffset += size*(CHAR_ME_Height + LINE_ME_Height);
             if(horizontalOffset > maxHorizontal) maxHorizontal = horizontalOffset;
             horizontalOffset = 0;
         }

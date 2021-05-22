@@ -2,7 +2,7 @@
 
 Rectangle::Rectangle(){
     Vector2 p1(10, 10);
-    Vector2 p2(WIDTH/2, HEIGHT/2);
+    Vector2 p2(ME_Width/2, ME_Height/2);
     color = RED;
     return;
 }

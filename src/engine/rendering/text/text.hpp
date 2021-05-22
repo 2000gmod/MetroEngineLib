@@ -5,13 +5,13 @@
 #include "../vectors.hpp"
 #include "../rendering.hpp"
 
-#define CHAR_HEIGHT 8
-#define CHAR_WIDTH 8
+#define CHAR_ME_Height 8
+#define CHAR_ME_Width 8
 
-#define SPACE_WIDTH 0
-#define LINE_HEIGHT 1
+#define SPACE_ME_Width 0
+#define LINE_ME_Height 1
 
-//                           HEIGHT
+//                           ME_Height
 const unsigned char font[][8] = {
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0000 (nul)
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0001

@@ -4,19 +4,22 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* screen;
 
+const int ME_Width = 960;
+const int ME_Height = 540;
+
 int main(){
-    initWindow("Title");
+    initWindow("MetroEngine Demo1", false);
 
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
-    Vector2 vec_mouse_coords(WIDTH/2, HEIGHT/2);
+    Vector2 vec_mouse_coords(ME_Width/2, ME_Height/2);
 
-    Vector2 vec_screen_center(WIDTH/2, HEIGHT/2);
+    Vector2 vec_screen_center(ME_Width/2, ME_Height/2);
     Vector2 vec_corner_UL(0,0);
-    Vector2 vec_corner_UR(0, WIDTH);
-    Vector2 vec_corner_LL(0, HEIGHT);
-    Vector2 vec_corner_LR(WIDTH, HEIGHT);
+    Vector2 vec_corner_UR(0, ME_Width);
+    Vector2 vec_corner_LL(0, ME_Height);
+    Vector2 vec_corner_LR(ME_Width, ME_Height);
 
     Text t1("", 1, vec_corner_UL, ORANGE);
     Text t2("test", 1, vec_corner_UL, WHITE);
@@ -32,15 +35,38 @@ int main(){
 
     PolyObject metroLogo({metroRombo1, metroRombo2, metroRombo3});
 
-    Poly tri1(LIME, CYAN, 6, FULL, {Vector2(WIDTH/2, HEIGHT/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
+    Poly tri1(GREEN, BLUE, 6, FULL, {Vector2(ME_Width/2, ME_Height/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
+
+    SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
+    //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
+    SDL_PauseAudioDevice(deviceID, 0);
 
     //GAMELOOP
-    SDL_Delay(500);
-    while(1){
+    //SDL_Delay(500);
+    bool isRunning = true;
+    while(isRunning){
+        //EVENTS
+        SDL_Event event;
+        while(SDL_PollEvent(&event)){
+            switch(event.type){
+                case SDL_QUIT:
+                    printf("Event: External exit request.\n");
+                    isRunning = false;
+                    break;
+                case SDL_MOUSEWHEEL:
+                    if(event.wheel.y > 0) printf("Event: Scroll up\n");
+                    if(event.wheel.y < 0) printf("Event: Scroll down\n");
+                    break;
+            }
+        }
+        if (!isRunning) break;
         //KEYBOARD
         SDL_PumpEvents();
         const Uint8 *state = SDL_GetKeyboardState(NULL);
-        if(state[SDL_SCANCODE_ESCAPE] || state[SDL_SCANCODE_Q]) break;
+        if(state[SDL_SCANCODE_ESCAPE] || state[SDL_SCANCODE_Q]){
+            printf("Event: Internal exit request.\n");
+            break;
+        }
 
         if(state[SDL_SCANCODE_W]) t2.p1.y -= 1;
         if(state[SDL_SCANCODE_S]) t2.p1.y += 1;
@@ -83,8 +109,14 @@ int main(){
             SDL_Delay(targetDelay - clock.deltaTime);
         }
     }
+    SDL_CloseAudioDevice(deviceID);
+    SDL_FreeWAV(wavBuffer);
+
     SDL_DestroyWindow(window);
     SDL_Quit();
+    printf("Exiting.\n");
+
+    delete pixel_array;
 
     return 0;
 }

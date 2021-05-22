@@ -6,7 +6,7 @@
 #include <string>
 
 
-void initWindow(std::string windowTitle);
+void initWindow(std::string windowTitle, bool fullscreen);
 void updateFrame();
 
 #endif

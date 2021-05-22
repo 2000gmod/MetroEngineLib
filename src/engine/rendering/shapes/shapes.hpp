@@ -10,6 +10,11 @@
 #define FULL 1
 #define EMPTY 0
 
+
+extern const int ME_Width;
+extern const int ME_Height;
+
+
 class Line{
     public:
         uint32_t color;
