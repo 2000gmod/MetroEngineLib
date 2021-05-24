@@ -43,23 +43,20 @@ int main(){
 
     //GAMELOOP
     //SDL_Delay(500);
-    bool isRunning = true;
-    while(isRunning){
+    while(1){
         //EVENTS
         SDL_Event event;
         while(SDL_PollEvent(&event)){
             switch(event.type){
                 case SDL_QUIT:
                     printf("Event: External exit request.\n");
-                    isRunning = false;
-                    break;
+                    goto exit;
                 case SDL_MOUSEWHEEL:
                     if(event.wheel.y > 0) printf("Event: Scroll up\n");
                     if(event.wheel.y < 0) printf("Event: Scroll down\n");
                     break;
             }
         }
-        if (!isRunning) break;
         //KEYBOARD
         SDL_PumpEvents();
         const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -83,7 +80,7 @@ int main(){
         clearScreen(pixel_array);
 
         tri1.draw();
-        tri1.update_vertices({Vector2(100, 100), vec_mouse_coords, Vector2(800,400)});
+        tri1.update_vertices({Vector2(100, 100), vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
         t2.setText("upperR " + std::to_string(line1.isOnSameSide(vec_mouse_coords, vec_corner_UR)));
@@ -95,9 +92,9 @@ int main(){
         t1.p1 = vec_mouse_coords + Vector2(10, 6);
         //center.draw();
         //center.update_position(vec_mouse_coords);
-        metroLogo.draw();
+        //metroLogo.draw();
         t1.draw();
-        //line1.draw();
+        line1.draw();
 
         
 
@@ -109,6 +106,7 @@ int main(){
             SDL_Delay(targetDelay - clock.deltaTime);
         }
     }
+exit:
     SDL_CloseAudioDevice(deviceID);
     SDL_FreeWAV(wavBuffer);
 
