@@ -12,12 +12,14 @@ uint32_t *pixel_array = new uint32_t[ME_Height*ME_Width];
 Clock::Clock(){
     deltaTime = 0;
     lastTime = 0;
+    totalTime = 0;
 }
 
 void Clock::Tick(){
     uint32_t time = SDL_GetTicks();
     deltaTime = time - lastTime;
     lastTime = time;
+    totalTime += deltaTime;
 }
 
 void clearScreen(uint32_t* pixelBuffer){
@@ -30,7 +32,19 @@ void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
     if(pos.x < 0 || pos.x >= ME_Width || pos.y < 0 || pos.y >= ME_Height){
         return;
     }
-    //if (!(pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)] ^ colour)) return;
+
+    uint32_t oldColor = pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)];
+    uint32_t oldAlpha = oldColor & 0x000000FF;
+    oldColor += (0xFF - oldAlpha);
+
+    uint32_t newAlpha = colour & 0x000000FF;
+    double alphaFraction = (double) newAlpha / 0xFF;
+    colour += (0xFF - newAlpha);
+
+    colour = alphaFraction * colour + (1 - alphaFraction) * oldColor;
+    newAlpha = colour & 0x000000FF;
+    colour += (0xFF - newAlpha);
+
     pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)] = colour;
     return;
 }

@@ -1,6 +1,12 @@
 #ifndef COLOR_HPP
 #define COLOR_HPP
 
+#include "../engine.hpp"
+
+
+uint32_t getColor(uint8_t red, uint8_t green, uint8_t blue);
+uint32_t getColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+
 #define ALICEBLUE                   0xF0F8FFFF
 #define ANTIQUEWHITE                0xFAEBD7FF
 #define AQUA                        0x00FFFFFF

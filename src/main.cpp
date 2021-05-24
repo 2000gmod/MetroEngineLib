@@ -26,18 +26,19 @@ int main(){
 
     Text title("METRO ENGINE DEMO 1", 3, Vector2(vec_screen_center.x - 300 , 0), RED);
 
-    Poly metroRombo1(RED, 2, FULL, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, pixel_array);
-    Poly metroRombo2(RED, 2, FULL, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, pixel_array);
-    Poly metroRombo3(RED, 2, FULL, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, pixel_array);
+    uint32_t metroColor = getColor(255, 0, 0, 255);
+    Poly metroRombo1(metroColor, 2, FULL, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, pixel_array);
+    Poly metroRombo2(metroColor, 2, FULL, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, pixel_array);
+    Poly metroRombo3(metroColor, 2, FULL, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, pixel_array);
 
     Line line1(WHITE, 2, vec_corner_UL, vec_corner_LR, pixel_array);
 
 
     PolyObject metroLogo({metroRombo1, metroRombo2, metroRombo3});
 
-    Poly tri1(GREEN, BLUE, 6, FULL, {Vector2(ME_Width/2, ME_Height/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
+    Poly tri1(GREEN, getColor(0, 50, 130, 40), 6, FULL, {Vector2(ME_Width/2, ME_Height/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
 
-    SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
+    //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
     SDL_PauseAudioDevice(deviceID, 0);
 
@@ -78,9 +79,10 @@ int main(){
         
         //DRAWING
         clearScreen(pixel_array);
+        metroLogo.draw();
 
         tri1.draw();
-        tri1.update_vertices({Vector2(100, 100), vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
+        tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
         t2.setText("upperR " + std::to_string(line1.isOnSameSide(vec_mouse_coords, vec_corner_UR)));
@@ -92,7 +94,6 @@ int main(){
         t1.p1 = vec_mouse_coords + Vector2(10, 6);
         //center.draw();
         //center.update_position(vec_mouse_coords);
-        //metroLogo.draw();
         t1.draw();
         line1.draw();
 

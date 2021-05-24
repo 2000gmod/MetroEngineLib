@@ -1,7 +1,7 @@
 TARGET = $(OUTDIR)/graph
 
 CC = g++
-CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs` -O1 -MMD
+CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs` -MMD -O2
 
 
 OBJDIR = obj

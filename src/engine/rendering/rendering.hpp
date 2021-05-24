@@ -11,6 +11,7 @@ class Clock{
     public:
         uint32_t deltaTime;
         uint32_t lastTime;
+        __uint128_t totalTime;
         Clock();
         void Tick();
 };
