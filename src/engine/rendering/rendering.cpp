@@ -7,7 +7,7 @@ extern SDL_Texture* screen;
 extern const int ME_Width;
 extern const int ME_Height;
 
-uint32_t *pixel_array = new uint32_t[ME_Height*ME_Width]; 
+uint32_t *screenArray = new uint32_t[ME_Height*ME_Width]; 
 
 Clock::Clock(){
     deltaTime = 0;
@@ -33,17 +33,23 @@ void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
         return;
     }
 
-    uint32_t oldColor = pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)];
-    uint32_t oldAlpha = oldColor & 0x000000FF;
-    oldColor += (0xFF - oldAlpha);
-
     uint32_t newAlpha = colour & 0x000000FF;
-    double alphaFraction = (double) newAlpha / 0xFF;
-    colour += (0xFF - newAlpha);
+    if(newAlpha == 0) return;
+    else if(newAlpha < 255) {
 
-    colour = alphaFraction * colour + (1 - alphaFraction) * oldColor;
-    newAlpha = colour & 0x000000FF;
-    colour += (0xFF - newAlpha);
+        double alphaFraction = (double) newAlpha / 0xFF;
+        colour += (0xFF - newAlpha);
+
+        uint32_t oldColor = pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)];
+        uint32_t oldAlpha = oldColor & 0x000000FF;
+        oldColor += (0xFF - oldAlpha);
+
+        
+
+        colour = alphaFraction * colour + (1 - alphaFraction) * oldColor;
+        newAlpha = colour & 0x000000FF;
+        colour += (0xFF - newAlpha);
+    }
 
     pixelBuffer[(int)round(pos.y)*ME_Width + (int)round(pos.x)] = colour;
     return;

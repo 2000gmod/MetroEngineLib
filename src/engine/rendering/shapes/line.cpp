@@ -17,8 +17,34 @@ Line::Line(uint32_t color_init, int thick, Vector2 point_1, Vector2 point_2, uin
 }
 
 void Line::draw(){
-    if (p1 == p2) return;
-    drawLine(pixelBuffer, p1, p2, color, thickness);
+    Vector2 drawing(0, 0);
+    if(p1.x > p2.x) swapVector2(&p1, &p2);
+
+    if(p1.x == p2.x){
+        drawing.x = p1.x;
+        if(p1.y > p2.y){
+            int temp = p2.y;
+            p2.y = p1.y;
+            p1.y = temp;
+        }
+        for(int k = p1.y; k<= p2.y; k++){
+            drawing.y = k;
+            drawPixelSize(pixelBuffer, drawing, color, thickness);
+        }
+        return;
+    }
+    float slope = (float) (p2.y - p1.y)/(p2.x - p1.x);
+
+    float axisCol = (float) p1.y - slope*p1.x;
+    for(int k = p1.x; k < p2.x; k++){
+        drawing.x = k;
+        drawing.y = k*slope + axisCol;
+        for(int j = 0; j <= fabs(slope); j++){
+            drawPixelSize(pixelBuffer, drawing, color, thickness);
+            if(slope < 0) drawing.y -= 1;
+            else drawing.y +=1;
+        }
+    }
     return;
 }
 

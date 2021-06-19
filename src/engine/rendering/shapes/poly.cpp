@@ -59,9 +59,9 @@ void Poly::draw(){
         line.draw();
     }
     line.p1 = vertices[0];
+    line.p2 = vertices.back();
     line.draw();
 
-    
 }
 
 void Poly::update_vertices(std::vector<Vector2> vertexList){
@@ -103,10 +103,10 @@ bool Poly::isInside(Vector2 point){
 }
 
 void Poly::updateMinMax(){
-    for(uint32_t i = 0; i < vertices.size(); i++){
-        if(vertices[i].x < minX) minX   =   (int) round(vertices[i].x);
-        if(vertices[i].x >= maxX) maxX  =   (int) round(vertices[i].x);
-        if(vertices[i].y < minY) minY   =   (int) round(vertices[i].y);
-        if(vertices[i].y >= maxY) maxY  =   (int) round(vertices[i].y);
+    for(Vector2 vertex : vertices){
+        if(vertex.x < minX)    minX    =   (int) round(vertex.x);
+        if(vertex.x >= maxX)   maxX    =   (int) round(vertex.x);
+        if(vertex.y < minY)    minY    =   (int) round(vertex.y);
+        if(vertex.y >= maxY)   maxY    =   (int) round(vertex.y);
     }
 }

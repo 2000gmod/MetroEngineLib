@@ -1,7 +1,7 @@
 TARGET = $(OUTDIR)/graph
 
 CC = g++
-CFLAGS = -Wall -g -lm `sdl2-config --cflags --libs` -MMD -O2
+CFLAGS = -Wall -lm `sdl2-config --cflags --libs` -MMD -g
 
 
 OBJDIR = obj
@@ -38,10 +38,13 @@ $(OBJDIR):
 	$(shell rsync -a --include='*/' --exclude='*' $(SRCDIR)/ $(OBJDIR)/)
 
 
-.PHONY: clean deepclean run
+.PHONY: clean deepclean run debug
 
 run: $(TARGET)
-	./$(TARGET)
+	$(TARGET)
+
+debug: $(TARGET)
+	gdb -ex run $(TARGET)
 
 clean:
 	rm -rf $(OUTDIR)

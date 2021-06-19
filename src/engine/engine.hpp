@@ -29,6 +29,6 @@ extern SDL_AudioSpec wavSpec;
 extern Uint32 wavLength;
 extern Uint8 *wavBuffer; 
 
-extern uint32_t *pixel_array;
+extern uint32_t *screenArray;
 
 #endif

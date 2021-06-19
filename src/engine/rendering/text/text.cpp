@@ -4,7 +4,7 @@
 extern const int ME_Width;
 extern const int ME_Height;
 
-extern uint32_t *pixel_array;
+extern uint32_t *screenArray;
 
 Text::Text(){
     body = "";
@@ -46,7 +46,7 @@ void Text::draw(){
             for(int j = 0; j < CHAR_ME_Width; j++){
                 if(chr[i] & (0x01 << j)){
                     Vector2 currPixel(p1.x + j*size + horizontalOffset, p1.y + i*size + verticalOffset);
-                        drawPixelSize(pixel_array, currPixel, color, size);
+                        drawPixelSize(screenArray, currPixel, color, size);
                 }
             }
         }

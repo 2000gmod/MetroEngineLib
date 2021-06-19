@@ -17,8 +17,8 @@ PolyObject::PolyObject(std::vector<Poly> objectList){
 }
 
 void PolyObject::draw(){
-    for (Poly poly : objects){
-        poly.draw();
+    for(uint64_t i = 0; i < objects.size(); i++){
+        objects[i].draw();
     }
 }
 

@@ -83,10 +83,10 @@ class Poly{
         bool isInside(Vector2 point);
 
     private:
-        int minX; 
-        int maxX; 
-        int minY;
-        int maxY;
+        int minX = 0; 
+        int maxX = 0; 
+        int minY = 0;
+        int maxY = 0;
         void updateMinMax();
 };
 

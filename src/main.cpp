@@ -27,25 +27,26 @@ int main(){
     Text title("METRO ENGINE DEMO 1", 3, Vector2(vec_screen_center.x - 300 , 0), RED);
 
     uint32_t metroColor = getColor(255, 0, 0, 255);
-    Poly metroRombo1(metroColor, 2, FULL, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, pixel_array);
-    Poly metroRombo2(metroColor, 2, FULL, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, pixel_array);
-    Poly metroRombo3(metroColor, 2, FULL, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, pixel_array);
+    Poly metroRombo1(metroColor, 2, FULL, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, screenArray);
+    Poly metroRombo2(metroColor, 2, FULL, {Vector2(200,100), Vector2(150,200), Vector2(200,300), Vector2(250,200)}, screenArray);
+    Poly metroRombo3(metroColor, 2, FULL, {Vector2(300,100), Vector2(250,200), Vector2(300,300), Vector2(350,200)}, screenArray);
 
-    Line line1(WHITE, 2, vec_corner_UL, vec_corner_LR, pixel_array);
+    Line line1(WHITE, 2, vec_corner_UL, vec_corner_LR, screenArray);
 
 
-    PolyObject metroLogo({metroRombo1, metroRombo2, metroRombo3});
+    PolyObject metroLogo(std::vector<Poly> {metroRombo1, metroRombo2, metroRombo3});
 
-    Poly tri1(GREEN, getColor(0, 50, 130, 40), 6, FULL, {Vector2(ME_Width/2, ME_Height/2), vec_mouse_coords, Vector2(0, 0)}, pixel_array);
+    Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {}, screenArray);
 
     //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
-    SDL_PauseAudioDevice(deviceID, 0);
+    //SDL_PauseAudioDevice(deviceID, 0);
 
     //GAMELOOP
     //SDL_Delay(500);
     while(1){
         //EVENTS
+        
         SDL_Event event;
         while(SDL_PollEvent(&event)){
             switch(event.type){
@@ -78,7 +79,7 @@ int main(){
         updateMouse(&vec_mouse_coords);
         
         //DRAWING
-        clearScreen(pixel_array);
+        clearScreen(screenArray);
         metroLogo.draw();
 
         tri1.draw();
@@ -115,7 +116,7 @@ exit:
     SDL_Quit();
     printf("Exiting.\n");
 
-    delete pixel_array;
+    delete screenArray;
 
     return 0;
 }
