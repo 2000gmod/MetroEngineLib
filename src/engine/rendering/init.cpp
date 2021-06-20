@@ -25,7 +25,7 @@ void initWindow(std::string windowTitle, bool fullscreen){
     //renderer = SDL_CreateRenderer(window, -1, 0);
     screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, ME_Width, ME_Height);
 
-    //deviceID = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+    deviceID = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
     return;
 }
 

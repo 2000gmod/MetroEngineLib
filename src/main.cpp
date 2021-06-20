@@ -36,11 +36,11 @@ int main(){
 
     PolyObject metroLogo(std::vector<Poly> {metroRombo1, metroRombo2, metroRombo3});
 
-    Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {}, screenArray);
+    Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {vec_mouse_coords, Vector2(800,400), Vector2(150,300)}, screenArray);
 
     //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
-    //SDL_PauseAudioDevice(deviceID, 0);
+    SDL_PauseAudioDevice(deviceID, 0);
 
     //GAMELOOP
     //SDL_Delay(500);
@@ -54,8 +54,8 @@ int main(){
                     printf("Event: External exit request.\n");
                     goto exit;
                 case SDL_MOUSEWHEEL:
-                    if(event.wheel.y > 0) printf("Event: Scroll up\n");
-                    if(event.wheel.y < 0) printf("Event: Scroll down\n");
+                    //if(event.wheel.y > 0) printf("Event: Scroll up\n");
+                    //if(event.wheel.y < 0) printf("Event: Scroll down\n");
                     break;
             }
         }
@@ -82,7 +82,7 @@ int main(){
         clearScreen(screenArray);
         metroLogo.draw();
 
-        tri1.draw();
+        
         tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
@@ -97,6 +97,7 @@ int main(){
         //center.update_position(vec_mouse_coords);
         t1.draw();
         line1.draw();
+        tri1.draw();
 
         
 
