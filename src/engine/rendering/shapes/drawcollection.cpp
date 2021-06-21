@@ -9,9 +9,7 @@ DrawableCollection::DrawableCollection(std::vector<Drawable*> shapesVector){
 }
 
 void DrawableCollection::draw(){
-    for(Drawable* shape : shapes) shape->draw();
-}
-
-Drawable* DrawableCollection::operator [] (int& index){
-    return shapes[index];
+    for(Drawable* element : shapes){
+        element->draw();
+    }
 }

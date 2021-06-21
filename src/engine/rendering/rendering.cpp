@@ -7,7 +7,7 @@ extern SDL_Texture* screen;
 extern int ME_Width;
 extern int ME_Height;
 
-uint32_t *screenArray = new uint32_t[ME_Height*ME_Width]; 
+uint32_t *screenArray;
 
 Clock::Clock(){
     deltaTime = 0;

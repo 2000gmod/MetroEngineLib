@@ -8,7 +8,8 @@ int ME_Width = 960;
 int ME_Height = 540;
 
 int main(){
-    initWindow("MetroEngine Demo1", false);
+    if (! applyConfiguration("config/meconfig.cfg")) return -1;
+    initWindow("MetroEngine Demo1");
 
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
@@ -88,9 +89,6 @@ int main(){
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
         t2.setText("upperR " + std::to_string(line1.isOnSameSide(vec_mouse_coords, vec_corner_UR)));
-        t2.draw();
-
-        title.draw();
         
         
         t1.p1 = vec_mouse_coords + Vector2(10, 6);

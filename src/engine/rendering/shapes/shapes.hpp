@@ -29,8 +29,6 @@ class DrawableCollection : public Drawable{
 
         void draw() override;
 
-        Drawable* operator [] (int& index);
-
         std::vector<Drawable*> shapes;
 };
 
