@@ -38,6 +38,8 @@ int main(){
 
     Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {vec_mouse_coords, Vector2(800,400), Vector2(150,300)}, screenArray);
 
+    DrawableCollection shapes({&metroLogo, &line1, &tri1});
+
     //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
     SDL_PauseAudioDevice(deviceID, 0);
@@ -80,8 +82,8 @@ int main(){
         
         //DRAWING
         clearScreen(screenArray);
-        metroLogo.draw();
-
+        //metroLogo.draw();
+        shapes.draw();
         
         tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
@@ -95,9 +97,9 @@ int main(){
         t1.p1 = vec_mouse_coords + Vector2(10, 6);
         //center.draw();
         //center.update_position(vec_mouse_coords);
-        t1.draw();
-        line1.draw();
-        tri1.draw();
+        //t1.draw();
+        //line1.draw();
+        //tri1.draw();
 
         
 

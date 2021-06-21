@@ -58,9 +58,7 @@ void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
 void drawPixelSize(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour, double size){
     if(fabs(size - 1) < 0.1f) drawPixel(pixelBuffer, pos, colour);
     if (size < 0.1f) return;
-    if(pos.x < 0 || pos.x >= ME_Width - size || pos.y < 0 || pos.y >= ME_Height - size){
-        return;
-    }
+    
     for(int i = (-size/2); i <= size/2; i++){
         for(int j = (-size/2); j <= size/2; j++){
             drawPixel(pixelBuffer, pos + Vector2(i, j), colour);

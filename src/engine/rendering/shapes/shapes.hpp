@@ -15,7 +15,25 @@
 extern const int ME_Width;
 extern const int ME_Height;
 
-class Line{
+class Drawable{
+    public:
+        virtual void draw() = 0;
+        virtual ~Drawable() = default;
+};
+
+class DrawableCollection : public Drawable{
+    public:
+        DrawableCollection();
+        DrawableCollection(std::vector<Drawable*> shapesVector);
+
+        void draw() override;
+
+        Drawable* operator [] (int& index);
+
+        std::vector<Drawable*> shapes;
+};
+
+class Line : public Drawable{
     public:
         uint32_t color;
         Vector2 p1;
@@ -26,13 +44,13 @@ class Line{
         Line();
         Line(uint32_t color_init, int thick, Vector2 point_1, Vector2 point_2, uint32_t* drawingBuffer);
 
-        void draw();
+        void draw() override;
         void update_position(Vector2 point_1, Vector2 point_2);
         void update_color(uint32_t new_color);
         bool isOnSameSide(Vector2 a, Vector2 b);
 };
 
-class Rectangle{
+class Rectangle : public Drawable{
     public:
         uint32_t color;
         Vector2 p1;
@@ -42,12 +60,12 @@ class Rectangle{
         Rectangle();
         Rectangle(uint32_t color_init, Vector2 point_1, Vector2 point_2, uint32_t* drawingBuffer);
 
-        void draw();
+        void draw() override;
         void update_position(Vector2 point_1, Vector2 point_2);
         void update_color(uint32_t new_color);
 };
 
-class Circle{
+class Circle : public Drawable{
     public:
         uint32_t color;
         Vector2 p1;
@@ -59,12 +77,12 @@ class Circle{
         Circle(uint32_t color_init,int thick, Vector2 point_1, double r, uint32_t* drawingBuffer);
         Circle(uint32_t color_init,int thick, Vector2 point_1, Vector2 point_2, uint32_t* drawingBuffer);
 
-        void draw();
+        void draw() override;
         void update_position(Vector2 point_1);
         void update_color(uint32_t new_color);
 };
 
-class Poly{
+class Poly : public Drawable{
     public:
         uint32_t color;
         uint32_t fillColor;
@@ -77,7 +95,7 @@ class Poly{
         Poly(uint32_t color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
         Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
 
-        void draw();
+        void draw() override;
         void update_vertices(std::vector<Vector2> vertexList);
         void update_color(uint32_t new_color_outline, uint32_t new_color_fill);
         void moveByVector(Vector2 move);
@@ -91,13 +109,13 @@ class Poly{
         void updateMinMax();
 };
 
-class PolyObject{
+class PolyObject : public Drawable{
     public:
         std::vector<Poly> objects;
 
         PolyObject(std::vector<Poly> objectList);
         
-        void draw();
+        void draw() override;
         void updateObjects(std::vector<Poly> objectList);
         void moveByVector(Vector2 move);
 };
