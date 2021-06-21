@@ -5,6 +5,8 @@
 #include "../vectors.hpp"
 #include "../rendering.hpp"
 
+#include "../shapes/shapes.hpp"
+
 #define CHAR_ME_Height 8
 #define CHAR_ME_Width 8
 
@@ -144,7 +146,7 @@ const unsigned char font[][8] = {
 };
 
 
-class Text{
+class Text : public Drawable{
     public:
         std::string body;
         uint32_t color;
@@ -157,7 +159,7 @@ class Text{
         void setText(std::string input);
         std::string getText();
 
-        void draw();
+        void draw() override;
 
         Vector2 getCenter();
 

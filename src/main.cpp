@@ -4,8 +4,8 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* screen;
 
-const int ME_Width = 960;
-const int ME_Height = 540;
+int ME_Width = 960;
+int ME_Height = 540;
 
 int main(){
     initWindow("MetroEngine Demo1", false);
@@ -38,7 +38,7 @@ int main(){
 
     Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {vec_mouse_coords, Vector2(800,400), Vector2(150,300)}, screenArray);
 
-    DrawableCollection shapes({&metroLogo, &line1, &tri1});
+    DrawableCollection shapes({&metroLogo, &t2, &title, &t1, &line1, &tri1});
 
     //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
@@ -83,7 +83,6 @@ int main(){
         //DRAWING
         clearScreen(screenArray);
         //metroLogo.draw();
-        shapes.draw();
         
         tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
@@ -104,6 +103,8 @@ int main(){
         
 
         //screen update
+
+        shapes.draw();
         updateFrame();
 
         clock.Tick();

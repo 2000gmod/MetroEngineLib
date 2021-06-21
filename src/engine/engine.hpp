@@ -17,7 +17,6 @@
 
 #define FRAMERATE               60
 
-#define PI                      3.1415
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;

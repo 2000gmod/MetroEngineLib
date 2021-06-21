@@ -4,8 +4,8 @@ extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 extern SDL_Texture* screen;
 
-extern const int ME_Width;
-extern const int ME_Height;
+extern int ME_Width;
+extern int ME_Height;
 
 uint32_t *screenArray = new uint32_t[ME_Height*ME_Width]; 
 
@@ -58,7 +58,7 @@ void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
 void drawPixelSize(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour, double size){
     if(fabs(size - 1) < 0.1f) drawPixel(pixelBuffer, pos, colour);
     if (size < 0.1f) return;
-    
+
     for(int i = (-size/2); i <= size/2; i++){
         for(int j = (-size/2); j <= size/2; j++){
             drawPixel(pixelBuffer, pos + Vector2(i, j), colour);

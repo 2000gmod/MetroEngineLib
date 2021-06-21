@@ -7,13 +7,14 @@
 
 #include "../vectors.hpp"
 #include "../rendering.hpp"
+#include "../color.hpp"
 
 #define FULL 1
 #define EMPTY 0
 
 
-extern const int ME_Width;
-extern const int ME_Height;
+extern int ME_Width;
+extern int ME_Height;
 
 class Drawable{
     public:

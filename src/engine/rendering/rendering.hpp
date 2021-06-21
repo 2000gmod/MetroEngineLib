@@ -4,7 +4,8 @@
 #include <SDL2/SDL.h>
 #include <math.h>
 #include "vectors.hpp"
-#include "../engine.hpp"
+
+#define PI                      3.1415
 
 
 class Clock{

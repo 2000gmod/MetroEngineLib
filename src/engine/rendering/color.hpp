@@ -1,7 +1,7 @@
 #ifndef COLOR_HPP
 #define COLOR_HPP
 
-#include "../engine.hpp"
+#include <inttypes.h>
 
 
 uint32_t getColor(uint8_t red, uint8_t green, uint8_t blue);

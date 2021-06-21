@@ -1,8 +1,8 @@
 #include "text.hpp"
 
 
-extern const int ME_Width;
-extern const int ME_Height;
+extern int ME_Width;
+extern int ME_Height;
 
 extern uint32_t *screenArray;
 
