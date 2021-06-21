@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <math.h>
 #include <vector>
+
 #include "../vectors.hpp"
 #include "../rendering.hpp"
 
@@ -100,6 +101,5 @@ class PolyObject{
         void updateObjects(std::vector<Poly> objectList);
         void moveByVector(Vector2 move);
 };
-
 
 #endif
