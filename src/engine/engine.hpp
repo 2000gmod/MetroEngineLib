@@ -14,7 +14,6 @@
 #include "rendering/text/text.hpp"
 #include "rendering/color.hpp"
 
-
 #define FRAMERATE               60
 
 

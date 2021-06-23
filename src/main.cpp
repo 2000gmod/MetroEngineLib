@@ -39,7 +39,7 @@ int main(){
 
     Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {vec_mouse_coords, Vector2(800,400), Vector2(150,300)}, screenArray);
 
-    DrawableCollection shapes({&metroLogo, &t2, &title, &t1, &line1, &tri1});
+    DrawableCollection shapes({&metroLogo, &t2, &title, &line1, &tri1, &t1});
 
     //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
