@@ -19,7 +19,7 @@ static bool fullscreen = false;
 
 void initWindow(std::string windowTitle){
     screenArray = new uint32_t[ME_Height*ME_Width]; 
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) exit(0);
+    if(SDL_Init(SDL_INIT_VIDEO) < 0) exit(0);
 
     int fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN;
     int normalFlag = SDL_WINDOW_SHOWN;

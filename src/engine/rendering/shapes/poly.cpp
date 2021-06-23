@@ -25,24 +25,38 @@ Poly::Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool painte
 }
 
 void Poly::draw(){
-    if (vertices.size() <= 2) return;
+    uint64_t vertSize = vertices.size();
+    if (vertSize <= 1) return;
+    if (vertSize == 2) Line(color, thickness, vertices[0], vertices[1], pixelBuffer).draw();
+
+    static std::vector<Vector2> intersections;
+    static bool drawEnabled = true;
+    static std::vector<Line> edges;
+
+    static Line drawer(fillColor, 1, Vector2(0,0), Vector2(0,0), pixelBuffer);
 
     if(full){
-        std::vector<Line> edges;
-        for (uint64_t v = 0; v < vertices.size() - 1; v++){
+        drawer.color = fillColor;
+        edges = {};
+
+        for (uint64_t v = 0; v < vertSize - 1; v++){
             edges.push_back(Line(WHITE, 1, vertices[v], vertices[v+1], NULL));
         }
         edges.push_back(Line(WHITE, 1, vertices.back(), vertices.front(), NULL));
 
         for(int curY = minY; curY <= maxY; curY++){
-            std::vector<Vector2> intersections;
-            bool drawEnabled = true;
+            intersections = {};
+            drawEnabled = true;
+
             for(Line line : edges){
+
                 if((line.p1.y < curY && line.p2.y < curY) || (line.p1.y >= curY && line.p2.y >= curY)) continue;
                 intersections.push_back(Vector2(((curY - line.p1.y)*(line.p1.x - line.p2.x))/(line.p1.y - line.p2.y) + line.p1.x, curY));
+
                 drawEnabled = !drawEnabled;
+
                 if (drawEnabled){
-                    Line drawer(fillColor, 1, intersections.back(), Vector2(0,0), pixelBuffer);
+                    drawer.p1 = intersections.back();
                     intersections.pop_back();
                     drawer.p2 = intersections.back();
                     intersections.pop_back();

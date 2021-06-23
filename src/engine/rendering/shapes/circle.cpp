@@ -24,7 +24,13 @@ Circle::Circle(uint32_t color_init,int thick, Vector2 point_1, Vector2 point_2, 
 }
 
 void Circle::draw(){
-    drawCircle(pixelBuffer, p1, radius, color, thickness);
+    Vector2 pixel(0, 0);
+    for(float t = 0.0f; t < 2*PI; t += 0.00390625f/2){
+        pixel.x = (int) round(radius*cos(t) + p1.x);
+        pixel.y = (int) round(radius*sin(t) + p1.y);
+        drawPixelSize(pixelBuffer, pixel, color, thickness);
+    }
+    return;
 }
 
 void Circle::update_position(Vector2 point_1){

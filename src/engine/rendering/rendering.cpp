@@ -127,14 +127,6 @@ void drawRectangle(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colou
     return;
 }
 
-void drawQuad(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, uint32_t colour){
-    drawLine(pixelBuffer, p1, p2, colour, 1);
-    drawLine(pixelBuffer, p2, p3, colour, 1);
-
-    drawLine(pixelBuffer, p3, p4, colour, 1);
-    drawLine(pixelBuffer, p4, p1, colour, 1);
-    return;
-}
 
 void drawFilledRect(uint32_t* pixelBuffer, Vector2 p1, Vector2 p2, uint32_t colour){
     if(p1.x == p2.x || p1.y == p2.y) return;
