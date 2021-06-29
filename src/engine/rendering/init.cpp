@@ -18,7 +18,8 @@ Uint8 *wavBuffer;
 static bool fullscreen = false;
 
 void initWindow(std::string windowTitle){
-    screenArray = new uint32_t[ME_Height*ME_Width]; 
+
+    screenArray = new uint32_t[ME_Height*ME_Width];
     if(SDL_Init(SDL_INIT_VIDEO) < 0) exit(0);
 
     int fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN;
@@ -31,6 +32,13 @@ void initWindow(std::string windowTitle){
     screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, ME_Width, ME_Height);
 
     deviceID = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+
+    SDL_Surface* icon = SDL_LoadBMP("res/icon.bmp");
+    if (icon == NULL){
+        exit(1);
+    }
+    SDL_SetWindowIcon(window, icon);
+
     return;
 }
 

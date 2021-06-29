@@ -16,7 +16,20 @@ Rectangle::Rectangle(uint32_t color_init, Vector2 point_1, Vector2 point_2, uint
 }
 
 void Rectangle::draw(){
-    drawRectangle(pixelBuffer, p1, p2, color);
+    Vector2 p3(0, 0);
+    Vector2 p4(0, 0);
+
+    p3.x = p2.x;
+    p3.y = p1.y;
+    
+    p4.x = p1.x;
+    p4.y = p2.y;
+
+    Line(color, 1, p1, p3, pixelBuffer).draw();
+    Line(color, 1, p1, p4, pixelBuffer).draw();
+
+    Line(color, 1, p2, p3, pixelBuffer).draw();
+    Line(color, 1, p2, p4, pixelBuffer).draw();
     return;
 }
 

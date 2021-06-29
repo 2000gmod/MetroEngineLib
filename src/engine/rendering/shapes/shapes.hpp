@@ -20,6 +20,7 @@ class Drawable{
     public:
         virtual void draw() = 0;
         virtual ~Drawable() = default;
+
 };
 
 class DrawableCollection : public Drawable{
@@ -31,6 +32,8 @@ class DrawableCollection : public Drawable{
 
         std::vector<Drawable*> shapes;
 };
+
+typedef DrawableCollection Scene;
 
 class Line : public Drawable{
     public:

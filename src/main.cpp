@@ -39,7 +39,7 @@ int main(){
 
     Poly tri1(getColor(0, 150, 0), getColor(0, 50, 130), 6, FULL, {vec_mouse_coords, Vector2(800,400), Vector2(150,300)}, screenArray);
 
-    DrawableCollection shapes({&metroLogo, &t2, &title, &line1, &tri1, &t1});
+    Scene mainScene({&metroLogo, &t2, &title, &line1, &tri1, &t1});
 
     //SDL_LoadWAV("audio/Tetris.wav", &wavSpec, &wavBuffer, &wavLength);
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
@@ -60,6 +60,14 @@ int main(){
                     //if(event.wheel.y > 0) printf("Event: Scroll up\n");
                     //if(event.wheel.y < 0) printf("Event: Scroll down\n");
                     break;
+
+                case SDL_WINDOWEVENT_SIZE_CHANGED:
+                    printf("Resized!\n");
+                    delete screenArray;
+                    SDL_GetWindowSize(window, &ME_Width, &ME_Height);
+                    screenArray = new uint32_t[ME_Width*ME_Height];
+                    break;
+                    
             }
         }
         //KEYBOARD
@@ -85,7 +93,7 @@ int main(){
         clearScreen(screenArray);
         //metroLogo.draw();
         
-        tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
+        //tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
         t2.setText("upperR " + std::to_string(line1.isOnSameSide(vec_mouse_coords, vec_corner_UR)));
@@ -102,7 +110,7 @@ int main(){
 
         //screen update
 
-        shapes.draw();
+        mainScene.draw();
         updateFrame();
 
         clock.Tick();

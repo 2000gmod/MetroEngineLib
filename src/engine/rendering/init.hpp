@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "rendering.hpp"
+#include "shapes/shapes.hpp"
 #include <string>
 #include <algorithm>
 #include <iostream>
