@@ -8,7 +8,7 @@ int ME_Width = 960;
 int ME_Height = 540;
 
 int main(){
-    if (! applyConfiguration("config/meconfig.cfg")) return -1;
+    if (! applyConfiguration("config/meconfig.cfg")) return 2;
     initWindow("MetroEngine Demo1");
 
     Clock clock;
