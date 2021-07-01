@@ -7,6 +7,7 @@ extern SDL_Texture* screen;
 extern int ME_Width;
 extern int ME_Height;
 
+
 uint32_t *screenArray;
 
 Clock::Clock(){
@@ -22,13 +23,14 @@ void Clock::Tick(){
     totalTime += deltaTime;
 }
 
+
 void clearScreen(uint32_t* pixelBuffer){
     for(int k = 0; k <= ME_Width * ME_Height; k++){
         pixelBuffer[k] = 0;
     }
 }
 
-void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
+void drawPixel(uint32_t* pixelBuffer, Vector2& pos, uint32_t colour){
     if(pos.x < 0 || pos.x >= ME_Width || pos.y < 0 || pos.y >= ME_Height){
         return;
     }
@@ -55,13 +57,17 @@ void drawPixel(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour){
     return;
 }
 
-void drawPixelSize(uint32_t* pixelBuffer, Vector2 pos, uint32_t colour, double size){
+void drawPixelSize(uint32_t* pixelBuffer, Vector2& pos, uint32_t colour, double size){
     if(fabs(size - 1) < 0.1f) drawPixel(pixelBuffer, pos, colour);
     if (size < 0.1f) return;
 
+    Vector2 drawing;
+
     for(int i = (-size/2); i <= size/2; i++){
         for(int j = (-size/2); j <= size/2; j++){
-            drawPixel(pixelBuffer, pos + Vector2(i, j), colour);
+            drawing.x = pos.x + i;
+            drawing.y = pos.y + j;
+            drawPixel(pixelBuffer, drawing, colour);
         }
     }
     return;

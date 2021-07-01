@@ -95,7 +95,7 @@ class Poly : public Drawable{
 
         Poly();
         Poly(uint32_t color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
-        Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool paintedInside,std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
+        Poly(uint32_t color_init, uint32_t fill_color_init, int thick, bool paintedInside, std::vector<Vector2> vertexList, uint32_t* drawingBuffer);
 
         void draw() override;
         void update_vertices(std::vector<Vector2> vertexList);

@@ -14,9 +14,11 @@ int main(){
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
+    playIntroAnimation(screenArray);
+
     Vector2 vec_mouse_coords(ME_Width/2, ME_Height/2);
 
-    Vector2 vec_screen_center(ME_Width/2, ME_Height/2);
+    Vector2 vecScreenCenter(ME_Width/2, ME_Height/2);
     Vector2 vec_corner_UL(0,0);
     Vector2 vec_corner_UR(0, ME_Width);
     Vector2 vec_corner_LL(0, ME_Height);
@@ -25,7 +27,7 @@ int main(){
     Text t1("", 1, vec_corner_UL, ORANGE);
     Text t2("test", 1, vec_corner_UL, WHITE);
 
-    Text title("METRO ENGINE DEMO 1", 3, Vector2(vec_screen_center.x - 300 , 0), RED);
+    Text title("METRO ENGINE DEMO 1", 3, Vector2(vecScreenCenter.x - 300 , 0), RED);
 
     uint32_t metroColor = getColor(255, 0, 0, 255);
     Poly metroRombo1(metroColor, 2, FULL, {Vector2(100,100), Vector2(50,200), Vector2(100,300), Vector2(150,200)}, screenArray);

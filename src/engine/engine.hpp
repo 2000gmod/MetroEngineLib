@@ -13,6 +13,7 @@
 #include "rendering/init.hpp"
 #include "rendering/text/text.hpp"
 #include "rendering/color.hpp"
+#include "misc/misc.hpp"
 
 #define FRAMERATE               60
 

@@ -1,7 +1,7 @@
 TARGET = $(OUTDIR)/graph
 
 CC = g++
-CFLAGS = -Wall -lm `sdl2-config --cflags --libs` -MMD -O3
+CFLAGS = -Wall -lm `sdl2-config --cflags --libs` -MMD -O2
 
 
 OBJDIR = obj
@@ -16,9 +16,6 @@ DEPS := $(shell find . -name '*.d')
 .PHONY: default
 default:
 	$(MAKE) $(TARGET)
-# 	$(MAKE) run
-
-
 
 $(TARGET): $(OBJECTS) | $(OUTDIR)
 	$(CC) -o $(TARGET) $^ $(CFLAGS) 
@@ -42,9 +39,6 @@ $(OBJDIR):
 
 run: $(TARGET)
 	$(TARGET)
-
-debug: $(TARGET)
-	gdb -ex run $(TARGET)
 
 clean:
 	rm -rf $(OUTDIR)
