@@ -1,4 +1,4 @@
-#include "vectors.hpp"
+#include "../include/vectors.hpp"
 
 Vector2 Vector2::operator + (const Vector2& vecIn){
     Vector2 vec(0, 0);

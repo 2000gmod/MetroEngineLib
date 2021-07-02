@@ -6,14 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "rendering/rendering.hpp"
-#include "rendering/vectors.hpp"
-#include "rendering/shapes/shapes.hpp"
-#include "rendering/input.hpp"
-#include "rendering/init.hpp"
-#include "rendering/text/text.hpp"
-#include "rendering/color.hpp"
-#include "misc/misc.hpp"
+#include "rendering.hpp"
+#include "vectors.hpp"
+#include "shapes.hpp"
+#include "input.hpp"
+#include "init.hpp"
+#include "text.hpp"
+#include "color.hpp"
+#include "misc.hpp"
 
 #define FRAMERATE               60
 

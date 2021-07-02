@@ -2,10 +2,10 @@
 #define TEXT_HPP
 
 #include <string>
-#include "../vectors.hpp"
-#include "../rendering.hpp"
+#include "vectors.hpp"
+#include "rendering.hpp"
 
-#include "../shapes/shapes.hpp"
+#include "shapes.hpp"
 
 #define CHAR_ME_Height 8
 #define CHAR_ME_Width 8

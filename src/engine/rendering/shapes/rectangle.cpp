@@ -1,4 +1,4 @@
-#include "shapes.hpp"
+#include "../../include/shapes.hpp"
 
 Rectangle::Rectangle(){
     Vector2 p1(10, 10);

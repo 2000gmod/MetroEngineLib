@@ -1,4 +1,4 @@
-#include "text.hpp"
+#include "../../include/text.hpp"
 
 
 extern int ME_Width;

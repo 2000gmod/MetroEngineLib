@@ -5,9 +5,9 @@
 #include <math.h>
 #include <vector>
 
-#include "../vectors.hpp"
-#include "../rendering.hpp"
-#include "../color.hpp"
+#include "vectors.hpp"
+#include "rendering.hpp"
+#include "color.hpp"
 
 #define FULL 1
 #define EMPTY 0

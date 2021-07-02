@@ -1,4 +1,4 @@
-#include "input.hpp"
+#include "../include/input.hpp"
 
 void updateMouse(Vector2* mouse){
     int x, y;

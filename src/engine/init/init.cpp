@@ -1,4 +1,4 @@
-#include "init.hpp"
+#include "../include/init.hpp"
 
 extern int ME_Width;
 extern int ME_Height;
@@ -83,6 +83,7 @@ int applyConfiguration(std::string configFileName){
         }
     }
     printf("W: %d, H: %d\n", ME_Width, ME_Height);
+    file.close();
     //printf("\n");
 
     return 1;

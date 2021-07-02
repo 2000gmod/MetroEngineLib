@@ -1,4 +1,4 @@
-#include "color.hpp"
+#include "../include/color.hpp"
 
 uint32_t getColor(uint8_t red, uint8_t green, uint8_t blue){
     uint32_t colorOut = 0;

@@ -1,7 +1,7 @@
 #ifndef MISC_HPP
 #define MISC_HPP
 
-#include "../engine.hpp"
+#include "engine.hpp"
 
 void playIntroAnimation(uint32_t* pixelBuffer);
 

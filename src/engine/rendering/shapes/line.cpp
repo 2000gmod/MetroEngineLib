@@ -1,4 +1,4 @@
-#include "shapes.hpp"
+#include "../../include/shapes.hpp"
 
 Line::Line(){
     Vector2 p1(0, 0);

@@ -1,4 +1,4 @@
-#include "misc.hpp"
+#include "../include/misc.hpp"
 
 extern int ME_Width;
 extern int ME_Height;

@@ -1,4 +1,4 @@
-#include "shapes.hpp"
+#include "../../include/shapes.hpp"
 
 Poly::Poly(){
     color = WHITE;
