@@ -71,5 +71,5 @@ bool Line::isOnSameSide(Vector2 a, Vector2 b){
 }
 
 Vector2 Line::getIntersection(Vector2 a, Vector2 b){
-    
+    return Vector2(0, 0);
 }

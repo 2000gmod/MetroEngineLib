@@ -11,13 +11,13 @@ int ME_Height = 540;
 
 int main(){
     if (! applyConfiguration("config/meconfig.cfg")) return 2;
-    initWindow("MetroEngine Demo1");
+    initWindow("Metro Engine :: GravitySim");
     srand(time(0));
 
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
-    //playIntroAnimation(screenArray);
+    playIntroAnimation(screenArray);
 
     Vector2 vec_mouse_coords(ME_Width/2, ME_Height/2);
 
@@ -31,7 +31,7 @@ int main(){
     //SDL_QueueAudio(deviceID, wavBuffer, wavLength);
     SDL_PauseAudioDevice(deviceID, 0);
 
-    GravitySim sim1(50);
+    GravitySim sim1(500);
     sim1.generate();
 
     //GAMELOOP
@@ -59,7 +59,7 @@ int main(){
 
                 case SDL_MOUSEBUTTONDOWN:
                     if(event.button.button == SDL_BUTTON_LEFT){
-                        //printf("Left click.\n");
+                        sim1.generate();
                     }
                     break;
                     

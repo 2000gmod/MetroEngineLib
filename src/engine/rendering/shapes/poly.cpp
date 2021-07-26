@@ -95,7 +95,7 @@ void Poly::moveByVector(Vector2 move){
     updateMinMax();
 }
 bool Poly::isInside(Vector2 point){
-    
+    return false;
 }
 
 void Poly::updateMinMax(){

@@ -9,7 +9,6 @@ class Planet : Drawable {
         Circle circle;
 
         Vector2 speed;
-        Vector2 gravAcc;
 
         float mass;
 

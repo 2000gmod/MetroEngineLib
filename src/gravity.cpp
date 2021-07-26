@@ -5,9 +5,10 @@ GravitySim::GravitySim(int numPlanets){
 }
 
 void GravitySim::generate(){
+    planets.clear();
     for (int i = 0; i < numPlanets; i++){
         u_int32_t genColor = getColor((int) 155*randomNum() + 100, (int) 155*randomNum() + 100, (int) 155*randomNum() + 100); 
-        Planet planet(Circle(genColor, 1, Vector2(ME_Height*randomNum(), ME_Height*randomNum()), 5, screenArray), Vector2(2 * randomNum() - 1, 2 * randomNum() - 1), 5);
+        Planet planet(Circle(genColor, 1, Vector2(ME_Width*randomNum(), ME_Height*randomNum()), 1, screenArray), Vector2(0, 0), 5);
         planets.push_back(planet);
     }
 }
@@ -17,22 +18,39 @@ void GravitySim::draw(){
 }
 
 void GravitySim::step(){
-    float gravityC = 1.0;
-    for (Planet& planetToUpdate : planets){
-        planetToUpdate.gravAcc = Vector2(0, 0);
+    float gravityC = 1;
+
+    for (unsigned int i = 0; i < planets.size(); i++){
+        Planet& planetToUpdate = planets[i];
+        Vector2 gravAcc;
         //update acc
-        for (Planet& otherPlanet : planets){
+        for (unsigned int j = 0; j < planets.size(); j++){
+            Planet& otherPlanet = planets[j];
             if (&planetToUpdate == &otherPlanet) continue;
 
             float dist = (planetToUpdate.circle.p1 - otherPlanet.circle.p1).magnitude();
 
-            planetToUpdate.gravAcc = planetToUpdate.gravAcc + (otherPlanet.circle.p1 - planetToUpdate.circle.p1) * ((otherPlanet.mass)/(dist * dist));
+            if (dist < planetToUpdate.circle.radius + otherPlanet.circle.radius) {
+                float totalMass = planetToUpdate.mass + otherPlanet.mass;
+                Vector2 totalMomentum = planetToUpdate.speed * planetToUpdate.mass + otherPlanet.speed * otherPlanet.mass;
+                Vector2 totalVel = totalMomentum / totalMass;
+                planetToUpdate.speed = totalVel;
+
+                planetToUpdate.circle.radius *= sqrt(totalMass / planetToUpdate.mass); 
+                planetToUpdate.mass = totalMass;
+
+                planetToUpdate.circle.p1 = (planetToUpdate.circle.p1 * (planetToUpdate.mass / totalMass) + otherPlanet.circle.p1 * (otherPlanet.mass / totalMass));
+
+                planets.erase(planets.begin() + j);
+                continue;
+            }
+            gravAcc = gravAcc + (otherPlanet.circle.p1 - planetToUpdate.circle.p1) * ((otherPlanet.mass)/(dist * dist));
         }
-        planetToUpdate.gravAcc = planetToUpdate.gravAcc * gravityC;
+        gravAcc = gravAcc * gravityC;
+        planetToUpdate.speed = planetToUpdate.speed + gravAcc;
+        //planetToUpdate.speed = planetToUpdate.speed * 0.85;
 
-        planetToUpdate.speed = planetToUpdate.speed + planetToUpdate.gravAcc;
-
-        planetToUpdate.circle.p1 =  (planetToUpdate.speed * ((float) 1 / FRAMERATE)) + planetToUpdate.circle.p1;
+        planetToUpdate.circle.p1 =  (planetToUpdate.speed * ((float) 1 / (FRAMERATE * 100))) + planetToUpdate.circle.p1;
     }
 
 }
