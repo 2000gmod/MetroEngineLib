@@ -95,25 +95,7 @@ void Poly::moveByVector(Vector2 move){
     updateMinMax();
 }
 bool Poly::isInside(Vector2 point){
-    std::vector<Line> edges;
-    int collisions = 0;
-
-    for (uint64_t v = 0; v < vertices.size() - 1; v++){
-        edges.push_back(Line(WHITE, 1, vertices[v], vertices[v+1], NULL));
-    }
-    edges.push_back(Line(WHITE, 1, vertices.back(), vertices.front(), NULL));
-
-    for(int i = (int) round(point.x); i <= maxX; i++){
-        Vector2 pointA = point;
-        Vector2 pointB(point.x + 1, point.y);
-        for (Line edge : edges){
-            if (!edge.isOnSameSide(pointA, pointB)) collisions++;
-        }
-        pointA.x++;
-        pointB.x++;
-    }
-    if(collisions % 2 != 0) return true;
-    else return false;
+    
 }
 
 void Poly::updateMinMax(){

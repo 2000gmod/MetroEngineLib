@@ -62,11 +62,12 @@ Vector2 Text::getCenter(){
 
     for(const unsigned char& c : body){
         horizontalOffset += size*(CHAR_ME_Width + SPACE_ME_Width);
+        if(horizontalOffset > maxHorizontal) maxHorizontal = horizontalOffset;
         if(c == '\n'){ 
-            verticalOffset += size*(CHAR_ME_Height + LINE_ME_Height);
-            if(horizontalOffset > maxHorizontal) maxHorizontal = horizontalOffset;
+            verticalOffset += 2*size*(CHAR_ME_Height + LINE_ME_Height);
             horizontalOffset = 0;
         }
     }
-    return Vector2(maxHorizontal/2, verticalOffset/2);
+
+    return Vector2(maxHorizontal/2, verticalOffset/2) + p1;
 }

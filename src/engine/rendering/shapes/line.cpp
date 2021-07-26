@@ -69,3 +69,7 @@ bool Line::isOnSameSide(Vector2 a, Vector2 b){
    if(dVectorA*dVectorB < 0) return true;
    else return false;
 }
+
+Vector2 Line::getIntersection(Vector2 a, Vector2 b){
+    
+}

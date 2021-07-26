@@ -14,7 +14,7 @@ int main(){
     Clock clock;
     uint32_t targetDelay = 1000/FRAMERATE;
 
-    playIntroAnimation(screenArray);
+    //playIntroAnimation(screenArray);
 
     Vector2 vec_mouse_coords(ME_Width/2, ME_Height/2);
 
@@ -69,6 +69,12 @@ int main(){
                     SDL_GetWindowSize(window, &ME_Width, &ME_Height);
                     screenArray = new uint32_t[ME_Width*ME_Height];
                     break;
+
+                case SDL_MOUSEBUTTONDOWN:
+                    if(event.button.button == SDL_BUTTON_LEFT){
+                        //printf("Left click.\n");
+                    }
+                    break;
                     
             }
         }
@@ -98,7 +104,7 @@ int main(){
         //tri1.update_vertices({vec_mouse_coords, Vector2(800,400), Vector2(150,300)});
         t1.setText("X: " + std::to_string(vec_mouse_coords.x) + "\nY: " + std::to_string(vec_mouse_coords.y));
 
-        t2.setText("upperR " + std::to_string(line1.isOnSameSide(vec_mouse_coords, vec_corner_UR)));
+        t2.setText("isInside ");
         
         
         t1.p1 = vec_mouse_coords + Vector2(10, 6);

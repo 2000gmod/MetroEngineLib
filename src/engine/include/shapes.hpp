@@ -50,6 +50,7 @@ class Line : public Drawable{
         void update_position(Vector2 point_1, Vector2 point_2);
         void update_color(uint32_t new_color);
         bool isOnSameSide(Vector2 a, Vector2 b);
+        Vector2 getIntersection(Vector2 a, Vector2 b);
 };
 
 class Rectangle : public Drawable{
